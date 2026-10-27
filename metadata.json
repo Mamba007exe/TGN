@@ -1,0 +1,6 @@
+{
+  "name": "The Goodwill Network",
+  "description": "A lean SaaS platform connecting verified NGOs, benefactors, and administrative governance with transparent donation tracking, MFS integration, and automated fee scheduling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

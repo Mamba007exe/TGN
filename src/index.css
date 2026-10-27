@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  --primary-corporate: #004182;
+  --bg-page: #E9ECEF;
+  --card-container: #FFFFFF;
+  --primary-text: #212529;
+  --secondary-text: #6C757D;
+  --donation-accent: #198754;
+  --verified-badge: #FFC107;
+  --border-color: #CED4DA;
+}
+
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #E9ECEF;
+  color: #212529;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Safe Area Inset Helpers for iPhone Home Indicator */
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 8px);
+}
+
+/* Horizontal scroll utility without ugly scrollbar track */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Strictly solid, flat UI with ZERO gradients, ZERO opacity mixes, and ZERO shadows */
+* {
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* Force pointy edges for all elements */
+button, input, select, textarea, div, article, section, modal, dialog, span, img {
+  border-radius: 0px !important;
+}
+
+/* Custom scrollbar matching flat aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E9ECEF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CED4DA;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6C757D;
+}

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#004182" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <script>
+      (function() {
+        // Universal Vite HMR WebSocket Dummy to prevent preview disconnection errors
+        class ViteHmrDummySocket extends EventTarget {
+          constructor() {
+            super();
+            this.readyState = 1; // WebSocket.OPEN
+            this.url = '';
+            this.protocol = 'vite-hmr';
+            this.extensions = '';
+            this.bufferedAmount = 0;
+            this.binaryType = 'blob';
+            this.onopen = null;
+            this.onclose = null;
+            this.onerror = null;
+            this.onmessage = null;
+
+            setTimeout(() => {
+              this.readyState = 1;
+              const evt = new Event('open');
+              this.dispatchEvent(evt);
+              if (typeof this.onopen === 'function') {
+                this.onopen(evt);
+              }
+            }, 0);
+          }
+          send() {}
+          close() {
+            // Keep open or cleanly no-op to avoid Vite client close throw
+          }
+        }
+
+        window.WebSocket = function() {
+          return new ViteHmrDummySocket();
+        };
+        window.WebSocket.prototype = ViteHmrDummySocket.prototype;
+        window.WebSocket.CONNECTING = 0;
+        window.WebSocket.OPEN = 1;
+        window.WebSocket.CLOSING = 2;
+        window.WebSocket.CLOSED = 3;
+
+        // Suppress benign Vite HMR logs and errors
+        const _origConsoleError = console.error;
+        console.error = function(...args) {
+          if (
+            typeof args[0] === 'string' &&
+            (args[0].includes('[vite]') ||
+             args[0].includes('WebSocket') ||
+             args[0].includes('vite-hmr'))
+          ) {
+            return;
+          }
+          _origConsoleError.apply(console, args);
+        };
+
+        window.addEventListener('error', function(event) {
+          if (
+            event.message &&
+            (event.message.includes('WebSocket') || event.message.includes('vite'))
+          ) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(event) {
+          if (
+            event.reason &&
+            ((typeof event.reason.message === 'string' && event.reason.message.includes('WebSocket')) ||
+             (typeof event.reason === 'string' && event.reason.includes('WebSocket')))
+          ) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+      })();
+    </script>
+    <title>The Goodwill Network</title>
+    <meta name="description" content="A lean SaaS platform connecting verified NGOs, benefactors, and administrative governance with transparent donation tracking, MFS integration, and automated fee scheduling." />
+    <meta property="og:title" content="The Goodwill Network" />
+    <meta property="og:description" content="A lean SaaS platform connecting verified NGOs, benefactors, and administrative governance with transparent donation tracking, MFS integration, and automated fee scheduling." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
